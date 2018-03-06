@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Get Address</title>
+</head>
+
+<body>
+  <input type="text" name="lat" id="lat" placeholder="latitude">
+  <input type="text" name="lng" id="lng" placeholder="longtitude">
+  <button onclick="send_request()">Get address</button>
+  <div id="result">...</div>
+  <script>
+    function send_request() {
+      var lng = document.getElementById("lng").value;
+      var lat = document.getElementById("lat").value;
+      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyAQol0ARTsgHZnLvPVVj1M8JcOxueOAXHU";
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          let response = JSON.parse(request.response);
+          if (response.status == "OK") {
+            var result = response.results[0].formatted_address;
+            document.getElementById("result").innerText = result;
+          }
+          else {
+            document.getElementById("result").innerText = "Not found";
+          }
+        }
+      }
+      request.open("GET", url, true);
+      request.send();
+    }
+
+  </script>
+</body>
+
+</html>
