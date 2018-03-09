@@ -6,13 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Get Address</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
 </head>
 
 <body>
-  <input type="text" name="lat" id="lat" placeholder="latitude">
-  <input type="text" name="lng" id="lng" placeholder="longtitude">
-  <button onclick="send_request()">Get address</button>
-  <div id="result">...</div>
+  <div class="container">
+    <div class="form-group">
+      <label for="lat">Latitude</label>
+      <input type="text" class="form-control" id="lat" placeholder="Latitude">
+    </div>
+    <div class="form-group">
+      <label for="lng">Password</label>
+      <input type="text" class="form-control" id="lng" placeholder="Longtitude">
+    </div>
+    <div style="text-align: center">
+      <button type="submit" class="btn btn-primary" onclick="send_request()">Get address</button>
+      <div id="result">...</div>
+    </div>
+  </div>
   <script>
     function send_request() {
       var lng = document.getElementById("lng").value;
@@ -34,7 +46,6 @@
       request.open("GET", url, true);
       request.send();
     }
-
   </script>
 </body>
 
