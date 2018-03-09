@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Distance</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        Source
+        <div class="form-group">
+          <label for="lat1">Latitude</label>
+          <input type="text" class="form-control" id="lat1" placeholder="Latitude">
+        </div>
+        <div class="form-group">
+          <label for="lng1">Longtitude</label>
+          <input type="text" class="form-control" id="lng1" placeholder="Longtitude">
+        </div>
+      </div>
+      <div class="col-md-6">
+        Destination
+        <div class="form-group">
+          <label for="lat2">Latitude</label>
+          <input type="text" class="form-control" id="lat2" placeholder="Latitude">
+        </div>
+        <div class="form-group">
+          <label for="lng2">Longtitude</label>
+          <input type="text" class="form-control" id="lng2" placeholder="Longtitude">
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <button type="submit" class="btn btn-primary" onclick="send_request()">Get distance</button>
+      <div id="result">...</div>
+    </div>
+  </div>
+  <script>
+    function send_request() {
+      var lng1 = document.getElementById("lng1").value;
+      var lat1 = document.getElementById("lat1").value;
+      var lng2 = document.getElementById("lng2").value;
+      var lat2 = document.getElementById("lat2").value;
+
+      var latlng1 = lat1 + ',' + lng1;
+      var latlng2 = lat2 + ',' + lng2;
+
+      var url = "/distance/?src=" + latlng1 + '&dest=' + latlng2;
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          let response = JSON.parse(request.response);
+          if (response.status == "OK") {
+            var result = response.distance;
+            document.getElementById("result").innerText = result + ' km';
+          }
+          else {
+            document.getElementById("result").innerText = "Not found";
+          }
+        }
+      }
+      request.open("GET", url, true);
+      request.send();
+    }
+  </script>
+</body>
+
+</html>

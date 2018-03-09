@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   var R = 6371;
@@ -16,10 +16,10 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 }
 
 function deg2rad(deg) {
-  return deg * (Math.PI/180)
+  return deg * (Math.PI/180);
 }
-
-app.get('/', (req, res) => res.send('OK! It works!'))
+app.use(express.static('public'));
+app.get('/', (req, res) => res.send('index.html'));
 app.get('/distance', (req, res) => {
   let [lat1, lon1] = req.query.src.split(',');
   let [lat2, lon2] = req.query.dest.split(',');
