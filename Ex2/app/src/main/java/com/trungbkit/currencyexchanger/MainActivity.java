@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     currencyList.put("VND", new Unit("VND", 28053.382784));
     currencyList.put("USD", new Unit("USD", 1.231222));
     currencyList.put("RON", new Unit("RON", 4.656969));
-    currencyList.put("AED", new Unit("RON", 4.52215));
-    currencyList.put("AFN", new Unit("RON", 85.816138));
+    currencyList.put("AED", new Unit("AED", 4.52215));
+    currencyList.put("AFN", new Unit("AFN", 85.816138));
 
     srcSpinner = findViewById(R.id.spn_source);
     destSpinner = findViewById(R.id.spn_dest);
